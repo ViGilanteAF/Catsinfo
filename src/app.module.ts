@@ -4,27 +4,27 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import * as mongoose from 'mongoose';
 import { AppService } from './app.service';
-import { CatsService } from './cats/cats.service';
 import { CatsModule } from './cats/cats.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true, //mongodb 에서 indexing 을 하겠다는말
-      useFindAndModify: true,
+      //useNewUrlParser: true,
+      //useUnifiedTopology: true,
+      //useCreateIndex: true, //mongodb 에서 indexing 을 하겠다는말
+      //useFindAndModify: false,
     }),
     CatsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, CatsService],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   private readonly isDev: boolean = process.env.MODE === 'dev' ? true : false;
+
   configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(LoggerMiddleware).forRoutes('*');
+    //consumer.apply(LoggerMiddleware).forRoutes('*');
     mongoose.set('debug', this.isDev);
   }
 }
