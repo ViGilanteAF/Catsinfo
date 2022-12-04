@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import * as mongoose from 'mongoose';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CatsModule } from './cats/cats.module';
       //useFindAndModify: false,
     }),
     CatsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
