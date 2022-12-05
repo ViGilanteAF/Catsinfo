@@ -46,11 +46,19 @@ export class Cat extends Document {
   @IsNotEmpty()
   password: string;
 
-  @Prop()
+  @Prop({
+    default:
+      'https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2F20160424_68%2Fykangdw_146145744770637i9N_JPEG%2F740_20160423_223319.jpg&type=sc960_832',
+  })
   @IsString()
   imgUrl: string;
 
-  readonly readOnlyData: { id: string; email: string; name: string };
+  readonly readOnlyData: {
+    id: string;
+    email: string;
+    name: string;
+    imgUrl: string;
+  };
 }
 
 export const CatSchema = SchemaFactory.createForClass(Cat);
@@ -61,5 +69,6 @@ CatSchema.virtual('readOnlyData').get(function (this: Cat) {
     id: this.id,
     email: this.email,
     name: this.name,
+    imgUrl: this.imgUrl,
   };
 });
