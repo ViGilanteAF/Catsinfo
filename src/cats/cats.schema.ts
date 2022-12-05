@@ -4,6 +4,7 @@ import { IsNotEmpty, IsEmail, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 const options: SchemaOptions = {
+  collection: 'cats',
   timestamps: true, //DB 에서 업데이트된 일자, 시각, 등등의 로그를 남겨줌
 };
 

@@ -42,6 +42,6 @@ export class CatsRepository {
   }
 
   async findAll() {
-    return await this.catModel.find({});
+    return await this.catModel.find();
   }
 }
