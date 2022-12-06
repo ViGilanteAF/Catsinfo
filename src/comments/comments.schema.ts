@@ -5,6 +5,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 const options: SchemaOptions = {
   timestamps: true, //DB 에서 업데이트된 일자, 시각, 등등의 로그를 남겨줌
+  collection: 'comments',
 };
 
 @Schema(options)
@@ -18,7 +19,6 @@ export class Comments extends Document {
     required: true,
     ref: 'cats',
   })
-  @IsEmail()
   @IsNotEmpty()
   author: Types.ObjectId;
 
@@ -40,7 +40,6 @@ export class Comments extends Document {
     default: 0,
   })
   @IsPositive()
-  @IsNotEmpty()
   likeCount: number;
 
   @ApiProperty({
@@ -50,7 +49,7 @@ export class Comments extends Document {
   @Prop({
     default: Types.ObjectId,
     required: true,
-    ref: 'cat',
+    ref: 'cats',
   })
   @IsNotEmpty()
   info: Types.ObjectId;

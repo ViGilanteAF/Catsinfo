@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { CommentsCreateDto } from '../dtos/commentsCreate.dto';
 import { CommentsService } from '../service/comments.service';
@@ -19,17 +19,17 @@ export class CommentsController {
     summary: '특정 고양이 프로파일에 적힌 댓글 가지고오기!!',
   })
   @Post(':id')
-  async createComments(
+  async createComment(
     @Param('id') id: string,
     @Body() body: CommentsCreateDto,
   ) {
-    return this.commentsService.createComments(id, body);
+    return this.commentsService.createComment(id, body);
   }
 
   @ApiOperation({
     summary: '따봉 숫자 증가 시키기',
   })
-  @Post(':')
+  @Patch(':id')
   async plusLike(@Param('id') id: string) {
     return this.commentsService.plusLike(id);
   }

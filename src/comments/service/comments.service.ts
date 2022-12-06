@@ -21,7 +21,7 @@ export class CommentsService {
     }
   }
 
-  async createComments(id: string, commentData: CommentsCreateDto) {
+  async createComment(id: string, commentData: CommentsCreateDto) {
     try {
       const targetCat = await this.catsRepository.findCatByIdWithoutPassword(
         id,
@@ -29,6 +29,7 @@ export class CommentsService {
       const { contents, author } = commentData;
       const validatedAuthor =
         await this.catsRepository.findCatByIdWithoutPassword(author);
+
       const newComment = new this.commentsModel({
         author: validatedAuthor._id,
         contents,
