@@ -1,6 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model, Types } from 'mongoose';
+import { CommentsSchema } from 'src/comments/comments.schema';
 import { Cat } from './cats.schema';
 import { CatRequestDto } from './dto/cats.request.dto';
 
@@ -26,7 +27,9 @@ export class CatsRepository {
     return await this.catModel.create(cat);
   }
 
-  async findCatByIdWithoutPassword(catId: string): Promise<Cat | null> {
+  async findCatByIdWithoutPassword(
+    catId: string | Types.ObjectId,
+  ): Promise<Cat | null> {
     const cat = await this.catModel.findById(catId).select('-password');
     return cat;
   }
@@ -42,6 +45,10 @@ export class CatsRepository {
   }
 
   async findAll() {
-    return await this.catModel.find();
+    const CommentsModel = mongoose.model('comments', CommentsSchema);
+    const result = await this.catModel
+      .find()
+      .populate('comments', CommentsModel); //다른 Document 와 이어줄수 있는 method
+    return result;
   }
 }
