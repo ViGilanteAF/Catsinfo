@@ -5,7 +5,7 @@
 
 # Purpose
 - Use Nest.js build Backend / Frontend
-- Use RestAPI run Server and Client
+- Use Restful API run Server and Client
 
 # Environment
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
